@@ -1,0 +1,22 @@
+doctype html
+head
+  title URL Shortening microservice
+body
+  h1 URL Shortening microservice
+  - if(error)
+    .error #{error}
+  - if(alias && url) {
+  p 
+    script document.write(window.location.hostname)
+    | /#{alias} now links to #{url}
+  - }
+
+  form(action="/", method="post")
+    label
+      | URL
+      input(type="text", name="url")
+
+    label
+      | Alias
+      input(type="text", name="alias")
+    input(type="submit")
