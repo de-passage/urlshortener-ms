@@ -37,9 +37,9 @@ insertNewURL = (db, url, id, callback) ->
     else
       urls.insert({ url: url, alias: alias })
         .then (r) ->
-          console.log r
           if r.insertedCount == 1
             callback null, alias
+            urls.updateOne { count: { $exists: true } }, { $set: { count: id + 1 } }
           else
             callback { error: "Insertion failed" }
 
@@ -62,7 +62,7 @@ app.use body_parser.urlencoded extended: true
 # Routes #
 # ########
 
-app.use '/static', express.static '/public'
+app.use '/styles', express.static path.join __dirname, '../../public/styles'
 
 app.get "/", (req, res) ->
   error = req.query.error

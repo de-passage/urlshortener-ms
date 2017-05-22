@@ -1,16 +1,48 @@
 doctype html
 head
   title URL Shortening microservice
+  link(href="/styles/style.css", type="text/css", rel="stylesheet")
+  meta(name="viewport", content="width=device-width, initial-scale=1.0")
 body
   h1 URL Shortening microservice
-  - if(error)
-    .error #{error}
-  - if(alias && url) {
-  p 
+  h2 Endpoints
+  .code-block
+    code
+      script document.write(window.location.hostname)
+      | /
+  .code-block
+    code
+      script document.write(window.location.hostname)
+      | /api/
+  h2 Methods
+  code
+    | GET
+    |
     script document.write(window.location.hostname)
-    | /#{alias} now links to #{url}
+    | /{{alias}}
+  p Redirects to a registered alias
+  code
+    | POST
+    |
+    script document.write(window.location.hostname)
+  p Register a new alias. Expected parameters are 'url' and 'alias'.
+  code
+    | GET
+    |
+    script document.write(window.location.hostname)
+    | /api/{{url}}
+  p Register the URL if needed and returns a JSON object containing the alias, the original URL and the full link (endpoint + alias). If the URL is already in the database, returns the first matching alias found, otherwise returns a new unique alias.
+  div
+  - if(error) {
+    .alert.error #{error}
+  - }
+  - if(alias && url) {
+    .alert.info
+      script document.write(window.location.hostname)
+      | /#{alias} now links to #{url}
   - }
 
+  h2 Try it!
   form(action="/", method="post")
     label
       | URL

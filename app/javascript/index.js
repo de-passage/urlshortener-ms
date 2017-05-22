@@ -42,9 +42,17 @@
           url: url,
           alias: alias
         }).then(function(r) {
-          console.log(r);
           if (r.insertedCount === 1) {
-            return callback(null, alias);
+            callback(null, alias);
+            return urls.updateOne({
+              count: {
+                $exists: true
+              }
+            }, {
+              $set: {
+                count: id + 1
+              }
+            });
           } else {
             return callback({
               error: "Insertion failed"
@@ -69,7 +77,7 @@
     extended: true
   }));
 
-  app.use('/static', express["static"]('/public'));
+  app.use('/styles', express["static"](path.join(__dirname, '../../public/styles')));
 
   app.get("/", function(req, res) {
     var alias, error, url;
