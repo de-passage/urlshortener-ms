@@ -74,7 +74,7 @@ app.post "/", (req, res) ->
   url = req.body.url
   alias = req.body.alias
   return res.redirect "/?error=" + encodeURIComponent("url or alias missing") unless url and alias?
-  return res.redirect "/?error=invalid url #{encodeURIComponent url}." unless isURL url
+  return res.redirect "/?error=invalid url #{encodeURIComponent url}. Please make sure you have included a protocole (http or https only) and that the format is correct." unless isURL url
   mongo.connect db_url, (err, db) ->
     if err
       renderErrorPage JSON.stringify(err), res
