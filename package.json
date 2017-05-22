@@ -1,0 +1,25 @@
+{
+  "name": "urlshortener-ms",
+  "version": "1.0.0",
+  "description": "URL shortening service",
+  "main": "app/javascript/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+	"start": "node app/javascript/index.js $PORT"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/de-passage/urlshortener-ms.git"
+  },
+  "author": "Sylvain Leclercq",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/de-passage/urlshortener-ms/issues"
+  },
+  "homepage": "https://github.com/de-passage/urlshortener-ms#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongodb": "^2.2.26",
+    "pug": "^2.0.0-rc.1"
+  }
+}
